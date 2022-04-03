@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TrackingPayment</string>
+    <string name="periyodgungir">Periyod Günü Giriniz</string>
+    <string name="kaydet">Kaydet</string>
+    <string name="odememiktar">Ödeme Miktarı</string>
+    <string name="odememiktari">Ödeme Miktarını Giriniz</string>
+    <string name="odemetarih">Ödeme Tarihi</string>
+    <string name="duzenle">Düzenle</string>
+    <string name="odemeekle">Ödeme Ekle</string>
+    <string name="silbtn">Sil</string>
+
+
+</resources>
