@@ -17,7 +17,7 @@ class OdemeGecmisAdapter (val context: Context, var liste:ArrayList<String>, val
     }
 
     override fun onBindViewHolder(holder: OdemeGecmisViewHolder, position: Int) {
-        holder.bindData(context, liste.get(position))
+      //  holder.bindData(context, liste.get(position))
     }
 
     override fun getItemCount(): Int {

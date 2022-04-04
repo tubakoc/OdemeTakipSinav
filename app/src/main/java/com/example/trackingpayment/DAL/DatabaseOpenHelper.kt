@@ -16,11 +16,11 @@ class DatabaseOpenHelper (
         val periyodGun = "PeriyodGun"
 
 
-        val sql = "CREATE TABLE OdemeTip(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Baslik TEXT, OdemePeriyod TEXT,PeriyodGun INTEGER)"
-        p0!!.execSQL(sql)
+        val sql = "CREATE TABLE OdemeTip(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, baslik TEXT, odemePeriyod TEXT,periyodGun INTEGER)"
+        p0?.execSQL(sql)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("Not yet implemented")
+
     }
 }

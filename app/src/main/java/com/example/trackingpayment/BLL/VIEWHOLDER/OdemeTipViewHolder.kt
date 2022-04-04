@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trackingpayment.MODELS.OdemeTip
 import com.example.trackingpayment.R
 
 class OdemeTipViewHolder (itemView : View, var itemClick : (position : Int) -> Unit):  RecyclerView.ViewHolder(itemView){
@@ -26,8 +27,11 @@ class OdemeTipViewHolder (itemView : View, var itemClick : (position : Int) -> U
         }
     }
 
-    fun bindData(context: Context, metin:String)
+    fun bindData(context: Context, odemeTip: OdemeTip)
     {
+        tipBaslik.text = odemeTip.baslik
+        tipPeriyod.text = odemeTip.odemePeriyod
+        tipGun.text = odemeTip.periyodGun.toString()
 
     }
 }

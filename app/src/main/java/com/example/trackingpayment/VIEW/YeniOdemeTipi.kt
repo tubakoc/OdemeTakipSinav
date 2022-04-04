@@ -3,6 +3,7 @@ package com.example.trackingpayment.VIEW
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import com.example.trackingpayment.DAL.OdemeTipOperation
 import com.example.trackingpayment.MODELS.OdemeTip
 import com.example.trackingpayment.R
@@ -20,20 +21,30 @@ class YeniOdemeTipi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityYeniOdemeTipiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val listePeriyod = arrayListOf<String>("Yıllık","Aylık","Haftalık")
+        val adap : ArrayAdapter<String> = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,listePeriyod)
+
+        binding.spPeriyod.adapter = adap
+
         odemeTipControl()
+
+
 
     }
 
     fun btnSil_OnClick(view: View) {
-        odemeTipOperation.deleteOdemeTip(odemeTip!!.Id!!)
+        odemeTipOperation.deleteOdemeTip(odemeTip!!.id!!)
         setResult(RESULT_OK)
         finish()
     }
     fun btnKaydet_Onclick(view: View) {
-        odemeTip!!.Baslik = binding.etOdemeTip.text.toString()
-       // odemeTip!!.PeriyodGun = binding.etPeriyodGun.text.toString()
+        //eksik kod var
+        odemeTip!!.baslik = binding.etOdemeTip.text.toString()
+        odemeTip!!.odemePeriyod = binding.spPeriyod.selectedItem.toString()
+        odemeTip!!.periyodGun = binding.etPeriyodGun.text.toString().toInt()
 
-        if (odemeTip!!.Id == null)
+
+        if (odemeTip!!.id == null)
         {
             odemeTipOperation.addOdemeTip(odemeTip!!)
         }
@@ -44,7 +55,7 @@ class YeniOdemeTipi : AppCompatActivity() {
         setResult(RESULT_OK)
         finish()
     }
-    fun odemeTipControl()
+    private fun odemeTipControl()
     {
         val odemeTipId = intent.getIntExtra("odemeTipId",-1)
         if (odemeTipId == -1)
@@ -54,12 +65,16 @@ class YeniOdemeTipi : AppCompatActivity() {
         }
         else
         {
-            //spinner seçeneklerini ekle spPeriyod haftalık aylık yıllık
-            odemeTip = odemeTipOperation.allOdemeTip(odemeTipId)
-            binding.etOdemeTip.setText(odemeTip!!.Baslik)
-            binding.etPeriyodGun.setText(odemeTip!!.PeriyodGun.toString())
-
+            odemeTip = odemeTipOperation.bringOdemeTip(odemeTipId)
+            binding.etOdemeTip.setText(odemeTip!!.baslik)
+            binding.etPeriyodGun.setText(odemeTip!!.periyodGun.toString())
+            binding.spPeriyod.selectedItem.toString()
             binding.btnSil.visibility = View.VISIBLE
         }
     }
+
+    fun periyodKontrol(list : ArrayList<String>)
+    {
+    }
+
 }

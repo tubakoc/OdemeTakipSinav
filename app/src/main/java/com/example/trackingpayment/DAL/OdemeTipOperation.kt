@@ -9,7 +9,7 @@ import com.example.trackingpayment.MODELS.OdemeTip
 
 class OdemeTipOperation (context: Context) {
     var dbOpenHelper : DatabaseOpenHelper
-    var OdemeTipDatabase : SQLiteDatabase? = null
+    var odemeTipDatabase : SQLiteDatabase? = null
 
     init {
         dbOpenHelper= DatabaseOpenHelper(context,"OdemeTipDb",null,1)
@@ -19,75 +19,77 @@ class OdemeTipOperation (context: Context) {
 
     fun open()
     {
-        OdemeTipDatabase = dbOpenHelper.writableDatabase
+        odemeTipDatabase = dbOpenHelper.writableDatabase
     }
 
     fun close()
     {
-        if (OdemeTipDatabase != null && OdemeTipDatabase!!.isOpen)
+        if (odemeTipDatabase != null && odemeTipDatabase!!.isOpen)
         {
-            OdemeTipDatabase!!.close()
+            odemeTipDatabase!!.close()
         }
     }
 
-    fun addOdemeTip(odemeTip : OdemeTip) : Long
+    fun addOdemeTip(odemeTip : OdemeTip)
     {
         val cv = ContentValues()
-        cv.put("Baslik",odemeTip.Baslik)
-        cv.put("OdemePeriyod",odemeTip.OdemePeriyod)
-        cv.put("PeriyodGun",odemeTip.PeriyodGun)
+        cv.put("baslik",odemeTip.baslik)
+        cv.put("odemePeriyod",odemeTip.odemePeriyod)
+        cv.put("periyodGun",odemeTip.periyodGun)
 
         open()
-        val etkilenenKayit = OdemeTipDatabase!!.insert("OdemeTip",null,cv)
+        odemeTipDatabase!!.insert("OdemeTip",null,cv)
         close()
-        return etkilenenKayit
+
     }
 
     fun updateOdemeTip(odemeTip : OdemeTip)
     {
         val cv = ContentValues()
-        cv.put("Baslik",odemeTip.Baslik)
-        cv.put("OdemePeriyod",odemeTip.OdemePeriyod)
-        cv.put("PeriyodGun",odemeTip.PeriyodGun)
+        cv.put("baslik",odemeTip.baslik)
+        cv.put("odemePeriyod",odemeTip.odemePeriyod)
+        cv.put("periyodGun",odemeTip.periyodGun)
 
         open()
-        OdemeTipDatabase!!.update("Yapilacak",cv, "Id = ?",
-            arrayOf(arrayOf(odemeTip.Id).toString()))
+        odemeTipDatabase!!.update("OdemeTip",cv,"id = ?", arrayOf(odemeTip.id.toString()))
         close()
     }
 
-    fun deleteOdemeTip(Id : Int)
+    fun deleteOdemeTip(id : Int)
     {
         open()
-        OdemeTipDatabase!!.delete("OdemeTip","Id = ?",arrayOf(Id.toString()))
+        odemeTipDatabase!!.delete("OdemeTip","id = ?", arrayOf(id.toString()))
+
+        close()
 
     }
 
-
+/*
     private fun fetcAllOdemeTip() : Cursor
     {
         val sorgu = "Select * from OdemeTip"
 
-        return OdemeTipDatabase!!.rawQuery(sorgu,null)
-    }
+        return odemeTipDatabase!!.rawQuery(sorgu,null)
+    }*/
 
-    // hata verse başka yöntem dene
      @SuppressLint("Range")
-     fun allOdemeTip() : ArrayList<OdemeTip>    //tüm tabloyu getir hata verse diğer yöntem dene
+     fun allOdemeTip() : ArrayList<OdemeTip>    //tüm tabloyu getir hata verse diğer yöntem dene diğer yöntem yaptım
     {
         val odemeTipList = ArrayList<OdemeTip>()
-        var odemeTip : OdemeTip
+
         open()
-        var c : Cursor = fetcAllOdemeTip()
+        val sql = "Select * from OdemeTip"
+        val c = odemeTipDatabase!!.rawQuery(sql,null)
 
         if (c.moveToFirst())
         {
+            var odemeTip : OdemeTip
             do{
                 odemeTip = OdemeTip()
-                odemeTip.Id = c.getInt(0)
-                odemeTip.Baslik = c.getString(c.getColumnIndex("Baslik"))
-                odemeTip.OdemePeriyod = c.getString(c.getColumnIndex("OdemePeriyod"))
-                odemeTip.PeriyodGun = c.getInt(c.getColumnIndex("PeriyodGun"))
+                odemeTip.id = c.getColumnIndex("id")
+                odemeTip.baslik = c.getString(c.getColumnIndex("baslik"))
+                odemeTip.odemePeriyod = c.getString(c.getColumnIndex("odemePeriyod"))
+                odemeTip.periyodGun = c.getInt(c.getColumnIndex("periyodGun"))
                 odemeTipList.add(odemeTip)
             }while (c.moveToNext())
 
@@ -98,25 +100,24 @@ class OdemeTipOperation (context: Context) {
     }
 
     @SuppressLint("Range")
-    fun allOdemeTip(Id: Int) : OdemeTip?
-    {
-        var odemeTip : OdemeTip? = null
+    fun bringOdemeTip(id: Int) : OdemeTip? {
+        var odemeTip: OdemeTip? = null
         open()
-        val sql = "Select * from OdemeTip where Id = ?"
-        val c = OdemeTipDatabase!!.rawQuery(sql, arrayOf(Id.toString()))
-        if (c.moveToFirst())
-        {
+        val sql = "Select * from OdemeTip where id = ?"
+        val c = odemeTipDatabase!!.rawQuery(sql, arrayOf(id.toString()))
+
+        if (c.moveToFirst()) {
             odemeTip = OdemeTip()
-            odemeTip.Id = c.getInt(0)
-            odemeTip.Baslik = c.getString(c.getColumnIndex("Baslik"))
-            odemeTip.OdemePeriyod = c.getString(c.getColumnIndex("OdemePeriyod"))
-            odemeTip.PeriyodGun = c.getInt(c.getColumnIndex("PeriyodGun"))
+            odemeTip.id = c.getColumnIndex("id")
+            odemeTip.baslik = c.getString(c.getColumnIndex("baslik"))
+            odemeTip.odemePeriyod = c.getString(c.getColumnIndex("odemePeriyod"))
+            odemeTip.periyodGun = c.getInt(c.getColumnIndex("periyodGun"))
         }
         close()
 
         return odemeTip
 
-
+    }
 /*
     fun addupdateCode(odemeTip : OdemeTip)
     {
@@ -130,5 +131,5 @@ class OdemeTipOperation (context: Context) {
 
 
 
-}
+
 }

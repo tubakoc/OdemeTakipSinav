@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trackingpayment.MODELS.OdemeGecmis
 import com.example.trackingpayment.R
 
 class OdemeGecmisViewHolder  (itemView : View, var itemClick : (position : Int) -> Unit):  RecyclerView.ViewHolder(itemView) {
@@ -20,7 +21,7 @@ class OdemeGecmisViewHolder  (itemView : View, var itemClick : (position : Int) 
             itemClick(adapterPosition)
         }
     }
-    fun bindData(context: Context, metin:String)
+    fun bindData(context: Context, odemeGecmis: OdemeGecmis)
     {
 
     }
