@@ -3,6 +3,7 @@ package com.example.trackingpayment.VIEW
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.example.trackingpayment.DAL.OdemeGecmisOperation
 import com.example.trackingpayment.MODELS.OdemeGecmis
 import com.example.trackingpayment.databinding.ActivityOdemeEkleBinding
@@ -19,12 +20,20 @@ class OdemeEkle : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOdemeEkleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var alinanId = intent.getIntExtra("OdemeEkleId",0)
+        odemeGecmisDetay()
 
         odemeGecmisControl()
-        val id = intent.getStringExtra("id")
+
+    }
+
+    private fun odemeGecmisDetay() {
+        val id = intent.getIntExtra("id",0)
         val tutar =intent.getIntExtra("tutar",0)
         val tarih = intent.getStringExtra("tarih")
 
+        binding.odemeMiktar.setText(tutar.toString(), TextView.BufferType.EDITABLE);
+        binding.editTextDate.setText(tarih, TextView.BufferType.EDITABLE);
     }
 
     fun btnOdemeKaydet_OnClick(view: View) {
@@ -42,12 +51,12 @@ class OdemeEkle : AppCompatActivity() {
         setResult(RESULT_OK)
         finish()
     }
-
+/*
     fun silBtn_OnClick(view: View) {
         odemeGecmisOperation.deleteOdemeGecmis(odemeGecmis!!.id!!)
         setResult(RESULT_OK)
         finish()
-    }
+    }*/
 
     private fun odemeGecmisControl()
     {
@@ -66,8 +75,5 @@ class OdemeEkle : AppCompatActivity() {
             binding.silbtn.visibility= View.VISIBLE
         }
     }
-
-
-
 
 }

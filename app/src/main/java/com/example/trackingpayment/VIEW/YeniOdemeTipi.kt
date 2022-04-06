@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.core.view.get
 import com.example.trackingpayment.DAL.OdemeTipOperation
 import com.example.trackingpayment.MODELS.OdemeTip
 import com.example.trackingpayment.R
@@ -21,13 +22,8 @@ class YeniOdemeTipi : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityYeniOdemeTipiBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val listePeriyod = arrayListOf<PeriyodListe>(
-            PeriyodListe.Yıllık,
-            PeriyodListe.Aylık,
-            PeriyodListe.Haftalık)
-        val adap : ArrayAdapter<PeriyodListe> = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,listePeriyod)
-
-        binding.spPeriyod.adapter = adap
+        val idDetay = intent.getStringExtra("id")
+        periyodKontrol()
         odemeTipControl()
     }
 
@@ -70,9 +66,21 @@ class YeniOdemeTipi : AppCompatActivity() {
         }
     }
 
-    fun periyodKontrol(list : ArrayList<PeriyodListe>)
+    fun periyodKontrol()
     {
+        val periyodlist : PeriyodListe
+        val listePeriyod = arrayListOf<PeriyodListe>(
+            PeriyodListe.Yıllık,
+            PeriyodListe.Aylık,
+            PeriyodListe.Haftalık)
+        val adap : ArrayAdapter<PeriyodListe> = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,listePeriyod)
 
+        binding.spPeriyod.adapter = adap
+        //binding.spPeriyod.selectedItem ==PeriyodListe.Haftalık.deger
+        if(binding.spPeriyod.selectedItem ==listePeriyod[0])
+        {
+           //binding.etPeriyodGun.text =
+        }
     }
 
 }

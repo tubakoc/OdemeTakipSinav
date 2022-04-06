@@ -26,15 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        odemeTipList = odemeTipOperation.allOdemeTip()
-
-        val adapter = OdemeTipAdapter(this,odemeTipList,::rvOdeme_OnClick)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.rvOdemeler.layoutManager = layoutManager
-        binding.rvOdemeler.addItemDecoration(DividerItemDecoration(this,layoutManager.orientation))
-        binding.rvOdemeler.adapter = adapter
-
+        odemeTipRecyler()
     }
 
     fun btnYeniOdemeTipiEkle_OnClick(view: View) {
@@ -70,5 +62,25 @@ fun yeniOdemeResult(result: ActivityResult)
             binding.rvOdemeler.adapter!!.notifyDataSetChanged()
         }
     }
+
+    fun odemeTipRecyler()
+    {
+        odemeTipList = odemeTipOperation.allOdemeTip()
+
+        val adapter = OdemeTipAdapter(this,odemeTipList,::rvOdeme_OnClick,::odemeEkleClick)
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.rvOdemeler.layoutManager = layoutManager
+        binding.rvOdemeler.addItemDecoration(DividerItemDecoration(this,layoutManager.orientation))
+        binding.rvOdemeler.adapter = adapter
+    }
+
+    private fun odemeEkleClick(i: Int) {
+        val intent = Intent(this,OdemeEkle::class.java)
+        var item = odemeTipList[i].id
+        intent.putExtra("OdemeEkleId",item)
+        startActivity(intent)
+    }
+
 
 }

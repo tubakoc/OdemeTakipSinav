@@ -29,7 +29,7 @@ class OdemeGecmisOperation (context: Context)  {
     fun addOdemeGecmis(odemeGecmis : OdemeGecmis)
     {
         val cv = ContentValues()
-       addupdateCode(odemeGecmis,cv)
+        addupdateCode(odemeGecmis,cv)
         odemeGecmisDatabase!!.insert("OdemeGecmis",null,cv)
         close()
     }
@@ -78,6 +78,8 @@ class OdemeGecmisOperation (context: Context)  {
     }
 
 
+
+
     @SuppressLint("Range")
     fun bringOdemeGecmis(id : Int) : OdemeGecmis?
     {
@@ -102,6 +104,7 @@ class OdemeGecmisOperation (context: Context)  {
     {
         cv.put("odemeTarih",odemeGecmis.odemeTarih)
         cv.put("odemeTutar",odemeGecmis.odemeTutar)
+
 
         open()
     }

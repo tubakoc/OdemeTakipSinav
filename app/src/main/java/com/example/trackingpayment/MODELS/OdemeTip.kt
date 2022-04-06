@@ -5,6 +5,6 @@ class OdemeTip {
     var baslik : String? = null
     var odemePeriyod : String? = null
     var periyodGun : Int? = null
-    lateinit var odemeGecmis : OdemeGecmis
+    var odemeGecmis : OdemeGecmis ? = null
 
 }

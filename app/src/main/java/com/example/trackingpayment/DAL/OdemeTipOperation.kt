@@ -55,14 +55,6 @@ class OdemeTipOperation (context: Context) {
 
     }
 
-/*
-    private fun fetcAllOdemeTip() : Cursor
-    {
-        val sorgu = "Select * from OdemeTip"
-
-        return odemeTipDatabase!!.rawQuery(sorgu,null)
-    }*/
-
      @SuppressLint("Range")
      fun allOdemeTip() : ArrayList<OdemeTip>
     {

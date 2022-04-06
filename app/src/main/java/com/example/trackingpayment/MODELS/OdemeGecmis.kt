@@ -4,4 +4,6 @@ class OdemeGecmis {
     var id:Int? = null
     var odemeTarih : String? = null
     var odemeTutar : Int? = null
+    var odemeTip : Int? = null
+
 }

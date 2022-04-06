@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trackingpayment.MODELS.OdemeTip
 import com.example.trackingpayment.R
 
-class OdemeTipViewHolder (itemView : View, var itemClick : (position : Int) -> Unit):  RecyclerView.ViewHolder(itemView){
+class OdemeTipViewHolder (itemView : View, var itemClick : (position : Int) -> Unit , var odemeEkleClick : (position : Int) -> Unit) :  RecyclerView.ViewHolder(itemView){
 
     var tipBaslik : TextView
     var tipPeriyod : TextView
@@ -24,6 +24,11 @@ class OdemeTipViewHolder (itemView : View, var itemClick : (position : Int) -> U
 
         itemView.setOnClickListener{
             itemClick(adapterPosition)
+        }
+
+        odemeEkle.setOnClickListener {
+            odemeEkleClick(adapterPosition)
+
         }
     }
 

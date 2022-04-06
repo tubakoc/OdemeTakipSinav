@@ -17,8 +17,8 @@ class DatabaseOpenHelper (
         val odemeTarih = "odemeTarih"
         val odemeTutar = "odemeTutar"
 
-        val sql = "CREATE TABLE IF NOT EXISTS OdemeTip(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, baslik TEXT, odemePeriyod TEXT,periyodGun INTEGER,FOREIGN KEY(id) REFERENCES OdemeGecmis(id))"
-        val sqlodeme = "CREATE TABLE OdemeGecmis(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,odemeTarih TEXT,odemeTutar INTEGER )"
+        val sql = "CREATE TABLE OdemeTip(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, baslik TEXT, odemePeriyod TEXT,periyodGun INTEGER,FOREIGN KEY(id) REFERENCES OdemeGecmis(id))"
+        val sqlodeme = "CREATE TABLE OdemeGecmis(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,odemeTarih TEXT,odemeTutar INTEGER)"
         db?.execSQL(sql)
         db?.execSQL(sqlodeme)
     }
