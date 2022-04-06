@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackingpayment.BLL.VIEWHOLDER.OdemeGecmisViewHolder
-import com.example.trackingpayment.BLL.VIEWHOLDER.OdemeTipViewHolder
+import com.example.trackingpayment.MODELS.OdemeGecmis
 import com.example.trackingpayment.R
 
 
-class OdemeGecmisAdapter (val context: Context, var liste:ArrayList<String>, val itemClick : (position : Int)->Unit):
+class OdemeGecmisAdapter (val context: Context, var liste:ArrayList<OdemeGecmis>, val itemClick : (position : Int)->Unit):
     RecyclerView.Adapter<OdemeGecmisViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OdemeGecmisViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.rvc_odeme_gecmis,parent,false)
@@ -17,7 +17,7 @@ class OdemeGecmisAdapter (val context: Context, var liste:ArrayList<String>, val
     }
 
     override fun onBindViewHolder(holder: OdemeGecmisViewHolder, position: Int) {
-      //  holder.bindData(context, liste.get(position))
+        holder.bindData(context, liste.get(position))
     }
 
     override fun getItemCount(): Int {

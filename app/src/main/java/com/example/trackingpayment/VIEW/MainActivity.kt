@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trackingpayment.BLL.ADAPTER.OdemeTipAdapter
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var odemeTipList = ArrayList<OdemeTip>()
     var odemeTipOperation : OdemeTipOperation
+
     init {
         odemeTipOperation = OdemeTipOperation(this)
     }
@@ -32,30 +35,40 @@ class MainActivity : AppCompatActivity() {
         binding.rvOdemeler.addItemDecoration(DividerItemDecoration(this,layoutManager.orientation))
         binding.rvOdemeler.adapter = adapter
 
-
-
     }
 
     fun btnYeniOdemeTipiEkle_OnClick(view: View) {
         val intent = Intent(this,YeniOdemeTipi::class.java)
-        startActivityForResult(intent,1)
+        yeniOdemeResultLauncher.launch(intent)
+
     }
     fun rvOdeme_OnClick(position : Int)
     {
-        val intent = Intent(this,YeniOdemeTipi::class.java)
-        intent.putExtra("odemeTipId",odemeTipList.get(position).id)
-
-        startActivityForResult(intent,2)
+        var id = "id"
+        var baslik ="baslik"
+        var odemePeriyod = "odemePeriyod"
+        var periyodGun = "periyodGun"
+        val intent = Intent(this,DetayPage::class.java)
+        var item = odemeTipList[position]
+        intent.putExtra(id,item.id)
+        intent.putExtra(baslik,item.baslik)
+        intent.putExtra(odemePeriyod,item.odemePeriyod)
+        intent.putExtra(periyodGun,item.periyodGun)
+        startActivity(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == RESULT_OK)
+
+    var yeniOdemeResultLauncher =registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::yeniOdemeResult)
+
+fun yeniOdemeResult(result: ActivityResult)
+    {
+        if (result.resultCode == RESULT_OK)
         {
             odemeTipList.clear()
             odemeTipList.addAll(odemeTipOperation.allOdemeTip())
             binding.rvOdemeler.adapter!!.notifyDataSetChanged()
         }
     }
+
 }

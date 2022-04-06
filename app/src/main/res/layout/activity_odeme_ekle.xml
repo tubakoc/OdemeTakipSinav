@@ -48,9 +48,10 @@
         android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="76dp"
         android:ems="10"
+        android:hint="Ödeme tarihini giriniz"
         android:inputType="date"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,12 +64,25 @@
         android:id="@+id/odemeKaydet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="140dp"
+        android:onClick="btnOdemeKaydet_OnClick"
         android:text="@string/kaydet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.843"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <Button
+        android:id="@+id/silbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="182dp"
+        android:layout_marginStart="24dp"
+        android:onClick="silBtn_OnClick"
+        android:text="SİL"
+        app:layout_constraintBottom_toBottomOf="@+id/odemeKaydet"
+        app:layout_constraintEnd_toStartOf="@+id/odemeKaydet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/odemeKaydet" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

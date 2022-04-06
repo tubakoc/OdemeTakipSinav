@@ -10,17 +10,23 @@ class DatabaseOpenHelper (
     factory: SQLiteDatabase.CursorFactory?,
     version: Int
 ) : SQLiteOpenHelper(context, name, factory, version) {
-    override fun onCreate(p0: SQLiteDatabase?) {
+    override fun onCreate(db: SQLiteDatabase?) {
         val baslik = "Baslik"
         val odemePeriyod = "OdemePeriyod"
         val periyodGun = "PeriyodGun"
+        val odemeTarih = "odemeTarih"
+        val odemeTutar = "odemeTutar"
 
-
-        val sql = "CREATE TABLE OdemeTip(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, baslik TEXT, odemePeriyod TEXT,periyodGun INTEGER)"
-        p0?.execSQL(sql)
+        val sql = "CREATE TABLE IF NOT EXISTS OdemeTip(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, baslik TEXT, odemePeriyod TEXT,periyodGun INTEGER,FOREIGN KEY(id) REFERENCES OdemeGecmis(id))"
+        val sqlodeme = "CREATE TABLE OdemeGecmis(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,odemeTarih TEXT,odemeTutar INTEGER )"
+        db?.execSQL(sql)
+        db?.execSQL(sqlodeme)
     }
 
-    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db!!.execSQL("DROP TABLE IF EXISTS OdemeTip")
+        db!!.execSQL("DROP TABLE IF EXISTS OdemeGecmis")
+        onCreate(db)
 
     }
 }

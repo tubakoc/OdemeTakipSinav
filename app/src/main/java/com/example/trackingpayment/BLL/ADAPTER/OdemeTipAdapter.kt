@@ -17,6 +17,7 @@ class OdemeTipAdapter(val context: Context, var liste: ArrayList<OdemeTip>, val 
 
     override fun onBindViewHolder(holder: OdemeTipViewHolder, position: Int) {
         holder.bindData(context, liste.get(position))
+
     }
 
     override fun getItemCount(): Int {

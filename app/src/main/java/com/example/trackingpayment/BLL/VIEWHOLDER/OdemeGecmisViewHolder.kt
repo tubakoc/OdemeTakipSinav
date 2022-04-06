@@ -23,6 +23,7 @@ class OdemeGecmisViewHolder  (itemView : View, var itemClick : (position : Int) 
     }
     fun bindData(context: Context, odemeGecmis: OdemeGecmis)
     {
-
+        tipTarih.text = odemeGecmis.odemeTarih
+        tipTutar.text = odemeGecmis.odemeTutar.toString()
     }
 }

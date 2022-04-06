@@ -13,6 +13,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="24dp"
         android:text="@string/duzenle"
+        android:onClick="btnDuzenle_OnClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,12 +24,13 @@
         android:layout_marginEnd="28dp"
         android:layout_marginTop="48dp"
         android:text="@string/odemeekle"
+        android:onClick="btnOdemeEkle_OnClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btn_duzenle"
         app:layout_constraintTop_toBottomOf="@+id/btn_duzenle" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_gecmisodeme"
+        android:id="@+id/rvGecmisodeme"
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginBottom="1dp"
@@ -46,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipBaslik" />
 
@@ -66,7 +66,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/odemePeriyod" />
 </androidx.constraintlayout.widget.ConstraintLayout>

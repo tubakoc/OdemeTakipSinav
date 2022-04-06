@@ -3,7 +3,6 @@ package com.example.trackingpayment.DAL
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.trackingpayment.MODELS.OdemeTip
 
@@ -33,11 +32,7 @@ class OdemeTipOperation (context: Context) {
     fun addOdemeTip(odemeTip : OdemeTip)
     {
         val cv = ContentValues()
-        cv.put("baslik",odemeTip.baslik)
-        cv.put("odemePeriyod",odemeTip.odemePeriyod)
-        cv.put("periyodGun",odemeTip.periyodGun)
-
-        open()
+        addupdateCode(odemeTip,cv)
         odemeTipDatabase!!.insert("OdemeTip",null,cv)
         close()
 
@@ -46,11 +41,7 @@ class OdemeTipOperation (context: Context) {
     fun updateOdemeTip(odemeTip : OdemeTip)
     {
         val cv = ContentValues()
-        cv.put("baslik",odemeTip.baslik)
-        cv.put("odemePeriyod",odemeTip.odemePeriyod)
-        cv.put("periyodGun",odemeTip.periyodGun)
-
-        open()
+       addupdateCode(odemeTip,cv)
         odemeTipDatabase!!.update("OdemeTip",cv,"id = ?", arrayOf(odemeTip.id.toString()))
         close()
     }
@@ -73,7 +64,7 @@ class OdemeTipOperation (context: Context) {
     }*/
 
      @SuppressLint("Range")
-     fun allOdemeTip() : ArrayList<OdemeTip>    //tüm tabloyu getir hata verse diğer yöntem dene diğer yöntem yaptım
+     fun allOdemeTip() : ArrayList<OdemeTip>
     {
         val odemeTipList = ArrayList<OdemeTip>()
 
@@ -118,16 +109,15 @@ class OdemeTipOperation (context: Context) {
         return odemeTip
 
     }
-/*
-    fun addupdateCode(odemeTip : OdemeTip)
+
+    fun addupdateCode(odemeTip : OdemeTip,cv : ContentValues)
     {
-        val cv = ContentValues()
-        cv.put("Baslik",odemeTip.Baslik)
-        cv.put("OdemePeriyod",odemeTip.OdemePeriyod)
-        cv.put("PeriyodGun",odemeTip.PeriyodGun)
+        cv.put("Baslik",odemeTip.baslik)
+        cv.put("OdemePeriyod",odemeTip.odemePeriyod)
+        cv.put("PeriyodGun",odemeTip.periyodGun)
         open()
     }
-    */
+
 
 
 
